@@ -84,7 +84,7 @@ export default function ModuleDetail({ userId }: { userId: string }) {
           <Link to="/dashboard" className="flex items-center text-white/40 hover:text-primary transition-colors group">
             <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center mr-3 group-hover:bg-primary/20 transition-colors p-1.5">
               <img 
-                src="/logo.png" 
+                src="/logo.svg" 
                 alt="Logo" 
                 className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all"
                 referrerPolicy="no-referrer"

@@ -48,15 +48,10 @@ export default function Welcome({ onLogin }: { onLogin: (id: string, name: strin
               className="w-28 h-28 bg-white/[0.03] rounded-[32px] flex items-center justify-center border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)] overflow-hidden p-4 group hover:border-primary/30 transition-colors"
             >
               <img 
-                src="/logo.png" 
+                src="/logo.svg" 
                 alt="DataAcademy Logo" 
                 className="w-full h-full object-contain filter group-hover:brightness-110 transition-all"
                 referrerPolicy="no-referrer"
-                onError={(e) => {
-                  // Fallback to Icon if image is missing
-                  e.currentTarget.style.display = 'none';
-                  e.currentTarget.parentElement!.innerHTML = '<div class="text-primary"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg></div>';
-                }}
               />
             </motion.div>
           </div>

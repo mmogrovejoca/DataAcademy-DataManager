@@ -92,13 +92,13 @@ export default function Certificate({ userId, userName }: { userId: string, user
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 mt-12 grid lg:grid-cols-[1fr_400px] gap-8">
+      <main className="max-w-7xl mx-auto px-4 mt-12 space-y-12">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="space-y-6"
+          className="grid lg:grid-cols-[1fr_400px] gap-8"
         >
-          <div className="bg-white/5 backdrop-blur-md rounded-[32px] p-8 border border-white/10">
+          <div className="bg-white/5 backdrop-blur-md rounded-[32px] p-8 border border-white/10 flex flex-col justify-center">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-14 h-14 bg-primary/20 rounded-2xl flex items-center justify-center border border-primary/30">
                 <CheckCircle2 className="text-primary" size={28} />
@@ -124,79 +124,93 @@ export default function Certificate({ userId, userName }: { userId: string, user
             </div>
           </div>
 
-          <div className="bg-white/5 rounded-[32px] p-8 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="bg-white/5 rounded-[32px] p-8 border border-white/10 flex flex-col justify-center gap-6">
             <div>
-              <h3 className="text-xl font-bold text-white mb-2">Descargar Documento Oficial</h3>
-              <p className="text-white/60 text-sm">Formato PDF de alta resolución con sellos digitales y firma de validez institucional.</p>
+              <h3 className="text-xl font-bold text-white mb-2">Descargar Documento</h3>
+              <p className="text-white/60 text-sm">Formato PDF 1920x1080 de alta resolución con sellos digitales.</p>
             </div>
             <a 
               href={api.getCertificateUrl(userId)}
               download
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#0f2027] hover:bg-primary hover:text-white font-bold rounded-2xl shadow-xl transition-all whitespace-nowrap group"
+              className="inline-flex items-center justify-center px-8 py-5 bg-white text-[#0f2027] hover:bg-primary hover:text-white font-black uppercase tracking-widest text-xs rounded-2xl shadow-xl transition-all group"
             >
-              <Download className="mr-2 group-hover:animate-bounce" size={22} /> Descargar Certificado
+              <Download className="mr-2 group-hover:animate-bounce" size={18} /> Obtener Certificado PDF
             </a>
           </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="relative"
+          className="relative max-w-2xl mx-auto w-full"
         >
-          {/* Certificate Preview Card */}
-          <div className="bg-white rounded-lg p-6 shadow-2xl overflow-hidden aspect-[1/1.4] flex flex-col relative text-gray-900 origin-top">
-            {/* Border Decorations */}
-            <div className="absolute inset-2 border-[6px] border-double border-blue-900 rounded-sm pointer-events-none" />
-            <div className="absolute inset-4 border border-blue-200 pointer-events-none" />
+          {/* Vertical Certificate Preview Card - Portrait A4 Ratio */}
+          <div className="bg-white rounded-[15px] shadow-2xl overflow-hidden aspect-[1/1.414] w-full flex flex-col relative text-gray-900 border-[12px] border-[#1e3a8a]/5 select-none transition-transform hover:scale-[1.01]">
+            {/* Elegant Background Tint */}
+            <div className="absolute bottom-0 left-0 w-full h-[15%] bg-[#f8fafc] -z-0" />
             
-            <div className="mt-8 text-center flex-1">
-              <h2 className="text-blue-900 font-bold text-lg tracking-[0.2em] mb-1">CERTIFICADO DE EXCELENCIA</h2>
-              <p className="text-[10px] text-gray-500 tracking-widest mb-4">DATAACADEMY GLOBAL EDUCATION</p>
+            {/* Border Decorations */}
+            <div className="absolute inset-4 sm:inset-10 border-[10px] border-double border-blue-900 rounded-sm pointer-events-none" />
+            <div className="absolute inset-7 sm:inset-[50px] border border-blue-100 pointer-events-none" />
+            
+            <div className="mt-12 sm:mt-24 text-center flex-1 z-10 px-6 overflow-hidden flex flex-col items-center">
+              {/* Logo on Certificate Mockup */}
+              <div className="w-16 sm:w-28 h-16 sm:h-28 mb-4 sm:mb-8">
+                <img 
+                  src="/logo.svg" 
+                  alt="Logo" 
+                  className="w-full h-full object-contain"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
+              <h2 className="text-blue-900 font-bold text-[8px] sm:text-lg tracking-[0.4em] mb-4 sm:mb-8 uppercase">DATAACADEMY GLOBAL EDUCATION</h2>
               
-              <div className="w-16 h-1 bg-blue-900 mx-auto mb-8"></div>
+              <h1 className="text-xl sm:text-5xl font-serif font-black text-blue-900 leading-tight uppercase">CERTIFICADO DE</h1>
+              <h1 className="text-2xl sm:text-6xl font-serif font-black text-blue-900 tracking-[0.1em] mb-8 sm:mb-16 uppercase">EXCELENCIA</h1>
               
-              <p className="text-[11px] text-gray-600 mb-2 uppercase tracking-wide">La dirección académica otorga el presente a:</p>
-              <h3 className="text-2xl font-serif font-black text-blue-950 mb-6 italic px-4 border-b border-gray-100 pb-2 inline-block min-w-[200px]">
+              <p className="text-[10px] sm:text-lg text-gray-500 mb-2 sm:mb-4 font-light tracking-wide italic">Se otorga la presente certificación académica a:</p>
+              <h3 className="text-xl sm:text-6xl font-serif font-black text-blue-950 mb-8 sm:mb-16 italic px-8 border-b-2 border-gray-100 pb-2 sm:pb-4 inline-block">
                 {userName.toUpperCase()}
               </h3>
               
-              <p className="text-[10px] leading-relaxed text-gray-700 px-8 mb-6 italic">
-                Por haber completado con distinción académica el programa de formación ejecutiva integral de 15 módulos
+              <p className="text-[8px] sm:text-base leading-relaxed text-gray-600 px-10 sm:px-20 mb-6 sm:mb-10 italic max-w-2xl mx-auto">
+                Por haber completado con distinción académica superior y rigor técnico el programa de formación ejecutiva integral de 15 módulos especializados en el dominio de:
               </p>
               
-              <h4 className="text-sm font-bold text-blue-900 mb-1 uppercase tracking-tighter">Certificación de Data Manager</h4>
-              <p className="text-[10px] font-medium text-gray-500 mb-8 italic">Especialidad en Gobierno de Datos y Seguridad</p>
+              <h4 className="text-sm sm:text-2xl font-bold text-blue-900 mb-1 uppercase tracking-tight">Certificación de Data Manager</h4>
+              <p className="text-[10px] sm:text-lg font-bold text-blue-500 mb-12 sm:mb-20">Especialidad Superior en Gobierno de Datos y Ciberseguridad</p>
               
-              <div className="flex justify-between items-end px-10 mt-10 relative">
-                <div className="text-center w-40 relative">
-                  {/* Digital Signature Image */}
-                  <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-28 h-28 pointer-events-none opacity-90">
-                    <img src="/seal.png" alt="Sello de Excelencia" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
+              {/* Footer Section for Vertical Layout */}
+              <div className="mt-auto w-full px-6 sm:px-20 pb-12 sm:pb-24 flex flex-col items-center gap-10 sm:gap-20">
+                {/* Signature Area */}
+                <div className="text-center w-full relative pt-12">
+                  <div className="absolute -top-12 sm:-top-24 left-1/2 -translate-x-1/2 w-24 sm:w-48 h-24 sm:h-48 pointer-events-none opacity-90">
+                    <img src="/seal.png" alt="Sello" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
                   </div>
-                  <div className="border-t border-gray-400 w-full mb-1 mt-4"></div>
-                  <p className="text-[8px] font-bold text-gray-800 text-nowrap">Miguel Jonathan Mogrovejo Cardenas</p>
-                  <p className="text-[7px] text-gray-500 uppercase leading-tight font-medium">Docente especialista en Gobierno de Datos y Ciberseguridad</p>
+                  <div className="border-t sm:border-t-2 border-gray-300 w-full mb-2 sm:mb-4"></div>
+                  <p className="text-[10px] sm:text-2xl font-black text-blue-950">Miguel Jonathan Mogrovejo Cardenas</p>
+                  <p className="text-[6px] sm:text-[10px] text-gray-400 uppercase leading-snug font-bold mt-1 tracking-widest">Docente Especialista en Gobierno de Datos y Seguridad</p>
                 </div>
-                
-                <div className="text-center">
-                  <div className="bg-gray-50 p-1 border border-gray-200">
-                    <QRCodeSVG value={validationUrl} size={60} level="H" />
+
+                {/* QR Code */}
+                <div className="flex flex-col items-center">
+                  <div className="bg-white p-1 sm:p-2 border border-gray-100 shadow-sm mb-2 rounded-lg sm:rounded-xl">
+                    <QRCodeSVG value={validationUrl} size={window.innerWidth < 640 ? 40 : 100} level="H" includeMargin={true} />
                   </div>
-                  <p className="text-[6px] mt-1 text-gray-400 font-mono tracking-tighter">{serialNumber}</p>
+                  <p className="text-[6px] sm:text-[10px] text-gray-300 font-mono tracking-widest uppercase">ID: {serialNumber}</p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 bg-blue-900 text-white p-2 flex justify-between items-center text-[7px] font-mono tracking-widest">
-              <span>VALIDACIÓN QR ACTIVA</span>
-              <span>VERIFIED SINCE {new Date().getFullYear()}</span>
+            <div className="absolute bottom-4 left-0 w-full flex justify-center text-[6px] sm:text-[10px] text-gray-300 font-mono tracking-[0.3em] uppercase px-4 text-center">
+              Verified Academic Credential • Global Validation Active
             </div>
           </div>
 
-          <div className="mt-4 text-center">
-            <p className="text-white/40 text-xs flex items-center justify-center gap-1">
-              <Award size={12} /> Previsualización interactiva de la certificación oficial
+          <div className="mt-6 text-center">
+            <p className="text-white/40 text-xs flex items-center justify-center gap-2">
+              <ShieldCheck size={14} className="text-primary" /> Certificación Académica (Formato Vertical • Alta Resolución)
             </p>
           </div>
         </motion.div>

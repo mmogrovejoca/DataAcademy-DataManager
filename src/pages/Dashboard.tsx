@@ -67,7 +67,7 @@ export default function Dashboard({ userId, userName, onLogout }: { userId: stri
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center border border-white/10 shrink-0 p-2 overflow-hidden">
                 <img 
-                  src="/logo.png" 
+                  src="/logo.svg" 
                   alt="Logo" 
                   className="w-full h-full object-contain"
                   referrerPolicy="no-referrer"
@@ -276,7 +276,7 @@ export default function Dashboard({ userId, userName, onLogout }: { userId: stri
       <footer className="max-w-7xl mx-auto px-8 py-16 mt-12 border-t border-white/5 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6">
         <div className="flex items-center gap-4 grayscale opacity-40 hover:grayscale-0 transition-all">
           <img 
-            src="/logo.png" 
+            src="/logo.svg" 
             alt="DataAcademy" 
             className="w-8 h-8 object-contain"
             referrerPolicy="no-referrer"
@@ -303,67 +303,81 @@ export default function Dashboard({ userId, userName, onLogout }: { userId: stri
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-3xl bg-white/10 backdrop-blur-[25px] border border-white/20 rounded-[32px] p-6 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] overflow-hidden"
+              className="relative w-full max-w-5xl bg-white/10 backdrop-blur-[25px] border border-white/20 rounded-[40px] p-8 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] overflow-hidden"
             >
               <button 
                 onClick={() => setShowPreview(false)}
-                className="absolute top-4 right-4 p-2 bg-black/20 hover:bg-black/40 text-white rounded-full transition-colors z-10"
+                className="absolute top-6 right-6 p-2 bg-black/20 hover:bg-black/40 text-white rounded-full transition-colors z-20"
               >
                 <X size={20} />
               </button>
               
-              <div className="text-center mb-6 mt-2">
-                <h3 className="text-2xl font-bold text-white mb-2">Previsualización de tu Certificación</h3>
-                <p className="text-white/60 font-light text-sm italic">Este es el diseño oficial que obtendrás al graduarte de DataAcademy.</p>
+              <div className="text-center mb-8">
+                <span className="text-primary text-[0.65rem] font-black uppercase tracking-[0.3em] block mb-2">Simulación de Grado</span>
+                <h3 className="text-2xl font-bold text-white mb-2">Vista Vertical de Certificación</h3>
+                <p className="text-white/40 font-light text-sm italic">Este es el formato académico final que recibirás al completar el programa.</p>
               </div>
 
-              {/* Final Certificate Style Mockup */}
-              <div className="bg-white rounded-lg p-6 shadow-2xl overflow-hidden aspect-[1/1.4] max-w-[380px] flex flex-col relative text-gray-900 mx-auto transform scale-90 sm:scale-100">
-                {/* Border Decorations */}
-                <div className="absolute inset-2 border-[6px] border-double border-blue-900 rounded-sm pointer-events-none" />
-                <div className="absolute inset-4 border border-blue-200 pointer-events-none" />
+              {/* Vertical Certificate Style Mockup - Portrait */}
+              <div className="bg-white rounded-xl shadow-2xl overflow-hidden aspect-[1/1.414] w-full max-w-[450px] mx-auto flex flex-col relative text-gray-900 border-[10px] border-[#1e3a8a]/5 select-none touch-none">
+                {/* Background Details */}
+                <div className="absolute bottom-0 left-0 w-full h-[12%] bg-[#f8fafc] -z-0" />
                 
-                <div className="mt-8 text-center flex-1">
-                  <h2 className="text-blue-900 font-bold text-lg tracking-[0.2em] mb-1">CERTIFICADO DE EXCELENCIA</h2>
-                  <p className="text-[10px] text-gray-500 tracking-widest mb-4">DATAACADEMY GLOBAL EDUCATION</p>
+                {/* Border Decorations */}
+                <div className="absolute inset-3 border-[6px] border-double border-blue-900 rounded-sm pointer-events-none" />
+                <div className="absolute inset-5 border border-blue-100 pointer-events-none" />
+                
+                <div className="mt-8 sm:mt-12 text-center flex-1 z-10 px-6 overflow-hidden flex flex-col items-center">
+                  {/* Logo on Certificate Mockup */}
+                  <div className="w-10 h-10 sm:w-16 sm:h-16 mb-4">
+                    <img 
+                      src="/logo.svg" 
+                      alt="Logo" 
+                      className="w-full h-full object-contain"
+                      referrerPolicy="no-referrer"
+                      onError={(e) => e.currentTarget.style.display = 'none'}
+                    />
+                  </div>
+
+                  <h2 className="text-blue-900 font-bold text-[6px] sm:text-[10px] tracking-[0.3em] mb-4 uppercase">DataAcademy Global Education</h2>
                   
-                  <div className="w-16 h-1 bg-blue-900 mx-auto mb-8"></div>
+                  <h1 className="text-xs sm:text-2xl font-serif font-black text-blue-900 leading-tight uppercase">Certificado de</h1>
+                  <h1 className="text-sm sm:text-3xl font-serif font-black text-blue-900 tracking-[0.1em] mb-4 sm:mb-8 uppercase">Excelencia</h1>
                   
-                  <p className="text-[11px] text-gray-600 mb-2 uppercase tracking-wide">La dirección académica otorga el presente a:</p>
-                  <h3 className="text-2xl font-serif font-black text-blue-950 mb-6 italic px-4 border-b border-gray-100 pb-2 inline-block min-w-[200px]">
+                  <p className="text-[6px] sm:text-[10px] text-gray-500 mb-1 font-light italic">Se otorga el presente a:</p>
+                  <h3 className="text-sm sm:text-2xl font-serif font-black text-blue-950 mb-4 sm:mb-8 italic px-4 border-b border-gray-100 pb-1 inline-block">
                     {userName.toUpperCase()}
                   </h3>
                   
-                  <p className="text-[10px] leading-relaxed text-gray-700 px-8 mb-6 italic">
-                    Por haber completado con distinción académica el programa de formación ejecutiva integral de 15 módulos
+                  <p className="text-[5px] sm:text-[9px] leading-relaxed text-gray-600 px-8 mb-4 italic">
+                    Por haber completado con distinción académica el programa de formación de 15 módulos en:
                   </p>
                   
-                  <h4 className="text-sm font-bold text-blue-900 mb-1 uppercase tracking-tighter">Certificación de Data Manager</h4>
-                  <p className="text-[10px] font-medium text-gray-500 mb-8 italic">Especialidad en Gobierno de Datos y Seguridad</p>
+                  <h4 className="text-[7px] sm:text-sm font-bold text-blue-900 mb-0.5 uppercase">Certificación de Data Manager</h4>
+                  <p className="text-[6px] sm:text-[10px] font-bold text-blue-500 mb-6 sm:mb-10">Especialidad en Gobierno de Datos y Seguridad</p>
                   
-                  <div className="flex justify-between items-end px-10 mt-10 relative">
-                    <div className="text-center w-40 relative">
-                      {/* Digital Signature Image Demo */}
-                      <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-28 h-28 pointer-events-none opacity-90">
-                        <img src="/seal.png" alt="Sello de Excelencia" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
+                  {/* Footer Section */}
+                  <div className="mt-auto w-full px-8 pb-8 flex flex-col items-center gap-6 sm:gap-10">
+                    <div className="text-center w-full relative">
+                      <div className="absolute -top-6 sm:-top-12 left-1/2 -translate-x-1/2 w-12 sm:w-24 h-12 sm:h-24 pointer-events-none opacity-90">
+                        <img src="/seal.png" alt="Sello" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
                       </div>
-                      <div className="border-t border-gray-400 w-full mb-1 mt-4"></div>
-                      <p className="text-[8px] font-bold text-gray-800 text-nowrap">Miguel Jonathan Mogrovejo Cardenas</p>
-                      <p className="text-[7px] text-gray-500 uppercase leading-tight font-medium">Docente especialista en Gobierno de Datos y Ciberseguridad</p>
+                      <div className="border-t border-gray-300 w-full mb-1"></div>
+                      <p className="text-[7px] sm:text-xs font-black text-blue-950">Miguel Jonathan Mogrovejo Cardenas</p>
+                      <p className="text-[5px] sm:text-[8px] text-gray-400 uppercase font-bold">Docente Especialista</p>
                     </div>
-                    
-                    <div className="text-center">
-                      <div className="bg-gray-50 p-1 border border-gray-200">
-                        <QRCodeSVG value={validationUrl} size={60} level="H" />
+
+                    <div className="flex flex-col items-center">
+                      <div className="bg-white p-1 border border-gray-100 rounded-lg">
+                        <QRCodeSVG value={validationUrl} size={window.innerWidth < 640 ? 30 : 50} level="H" />
                       </div>
-                      <p className="text-[6px] mt-1 text-gray-400 font-mono tracking-tighter">{serialNumber}</p>
+                      <p className="text-[5px] text-gray-300 font-mono mt-1">{serialNumber}</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-8 bg-blue-900 text-white p-2 flex justify-between items-center text-[7px] font-mono tracking-widest">
-                  <span>VALIDACIÓN QR ACTIVA</span>
-                  <span>VERIFIED SINCE {new Date().getFullYear()}</span>
+                <div className="absolute bottom-2 left-0 w-full flex justify-center text-[4px] sm:text-[8px] text-gray-300 font-mono tracking-widest uppercase opacity-50">
+                  Global Academic Credential Active
                 </div>
               </div>
             </motion.div>
