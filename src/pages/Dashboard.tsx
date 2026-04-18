@@ -327,40 +327,45 @@ export default function Dashboard({ userId, userName, onLogout }: { userId: stri
                 <div className="absolute inset-3 border-[6px] border-double border-blue-900 rounded-sm pointer-events-none" />
                 <div className="absolute inset-5 border border-blue-100 pointer-events-none" />
                 
-                <div className="mt-8 sm:mt-12 text-center flex-1 z-10 px-6 overflow-hidden flex flex-col items-center">
+                <div className="mt-6 sm:mt-10 text-center flex-1 z-10 px-6 overflow-hidden flex flex-col items-center">
                   {/* Logo on Certificate Mockup */}
-                  <div className="w-10 h-10 sm:w-16 sm:h-16 mb-4">
+                  <div className="w-8 h-8 sm:w-12 sm:h-12 mb-3">
                     <img 
                       src="/logo.svg" 
                       alt="Logo" 
                       className="w-full h-full object-contain"
                       referrerPolicy="no-referrer"
-                      onError={(e) => e.currentTarget.style.display = 'none'}
                     />
                   </div>
 
-                  <h2 className="text-blue-900 font-bold text-[6px] sm:text-[10px] tracking-[0.3em] mb-4 uppercase">DataAcademy Global Education</h2>
+                  <h2 className="text-blue-900 font-bold text-[5px] sm:text-[8px] tracking-[0.3em] mb-3 uppercase">DataAcademy Global Education</h2>
                   
-                  <h1 className="text-xs sm:text-2xl font-serif font-black text-blue-900 leading-tight uppercase">Certificado de</h1>
-                  <h1 className="text-sm sm:text-3xl font-serif font-black text-blue-900 tracking-[0.1em] mb-4 sm:mb-8 uppercase">Excelencia</h1>
+                  <h1 className="text-[10px] sm:text-xl font-serif font-black text-blue-900 leading-tight uppercase">Certificado de</h1>
+                  <h1 className="text-xs sm:text-2xl font-serif font-black text-blue-900 tracking-[0.1em] mb-4 sm:mb-6 uppercase">Excelencia</h1>
                   
-                  <p className="text-[6px] sm:text-[10px] text-gray-500 mb-1 font-light italic">Se otorga el presente a:</p>
-                  <h3 className="text-sm sm:text-2xl font-serif font-black text-blue-950 mb-4 sm:mb-8 italic px-4 border-b border-gray-100 pb-1 inline-block">
+                  <p className="text-[5px] sm:text-[9px] text-gray-500 mb-0.5 font-light italic">Se otorga el presente a:</p>
+                  <h3 className="text-xs sm:text-xl font-serif font-black text-blue-950 mb-4 sm:mb-6 italic px-4 border-b border-gray-100 pb-0.5 inline-block">
                     {userName.toUpperCase()}
                   </h3>
                   
-                  <p className="text-[5px] sm:text-[9px] leading-relaxed text-gray-600 px-8 mb-4 italic">
+                  <p className="text-[4px] sm:text-[8px] leading-relaxed text-gray-600 px-8 mb-3 italic">
                     Por haber completado con distinción académica el programa de formación de 15 módulos en:
                   </p>
                   
-                  <h4 className="text-[7px] sm:text-sm font-bold text-blue-900 mb-0.5 uppercase">Certificación de Data Manager</h4>
-                  <p className="text-[6px] sm:text-[10px] font-bold text-blue-500 mb-6 sm:mb-10">Especialidad en Gobierno de Datos y Seguridad</p>
+                  <h4 className="text-[6px] sm:text-xs font-bold text-blue-900 mb-0.5 uppercase">Certificación de Data Manager</h4>
+                  <p className="text-[5px] sm:text-[8px] font-bold text-blue-500 mb-4 sm:mb-8">Especialidad en Gobierno de Datos y Seguridad</p>
                   
                   {/* Footer Section */}
-                  <div className="mt-auto w-full px-8 pb-8 flex flex-col items-center gap-6 sm:gap-10">
+                  <div className="mt-auto w-full px-8 pb-6 flex flex-col items-center gap-4 sm:gap-8">
                     <div className="text-center w-full relative">
-                      <div className="absolute -top-6 sm:-top-12 left-1/2 -translate-x-1/2 w-12 sm:w-24 h-12 sm:h-24 pointer-events-none opacity-90">
-                        <img src="/seal.png" alt="Sello" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
+                      <div className="absolute -top-8 sm:-top-16 left-1/2 -translate-x-1/2 w-16 sm:w-32 h-16 sm:h-32 pointer-events-none z-20">
+                        <img 
+                          src="/seal.png" 
+                          alt="Sello Data Governance Expert" 
+                          className="w-full h-full object-contain drop-shadow-2xl" 
+                          referrerPolicy="no-referrer"
+                          onError={(e) => e.currentTarget.style.display = 'none'}
+                        />
                       </div>
                       <div className="border-t border-gray-300 w-full mb-1"></div>
                       <p className="text-[7px] sm:text-xs font-black text-blue-950">Miguel Jonathan Mogrovejo Cardenas</p>

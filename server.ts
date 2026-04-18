@@ -103,9 +103,10 @@ async function startServer() {
     doc.lineWidth(4).strokeColor('#3b82f6').rect(70, 70, 940, 1780).stroke();
 
     // Custom Vector Logo - Centred at Top
-    const logoX = (1080 - 180) / 2;
-    const logoY = 100;
-    const scale = 180 / 400;
+    const logoTargetWidth = 140; 
+    const logoX = (1080 - logoTargetWidth) / 2;
+    const logoY = 90;
+    const scale = logoTargetWidth / 400;
 
     doc.save()
        .translate(logoX, logoY)
@@ -122,30 +123,30 @@ async function startServer() {
     doc.restore();
 
     // Header Branding
-    doc.fontSize(22).fillColor('#1e3a8a').text('DATAACADEMY GLOBAL EDUCATION', 0, 340, { align: 'center', characterSpacing: 4 });
+    doc.fontSize(22).fillColor('#1e3a8a').text('DATAACADEMY GLOBAL EDUCATION', 0, 310, { align: 'center', characterSpacing: 4 });
     
-    doc.moveTo(490, 380).lineTo(590, 380).lineWidth(4).stroke('#1e3a8a');
+    doc.moveTo(490, 345).lineTo(590, 345).lineWidth(4).stroke('#1e3a8a');
 
     // Main Title
-    doc.fontSize(80).font('Helvetica-Bold').fillColor('#1e3a8a').text('CERTIFICADO DE', 0, 480, { align: 'center', characterSpacing: 2 });
-    doc.fontSize(90).text('EXCELENCIA', 0, 580, { align: 'center', characterSpacing: 4 });
+    doc.fontSize(80).font('Helvetica-Bold').fillColor('#1e3a8a').text('CERTIFICADO DE', 0, 440, { align: 'center', characterSpacing: 2 });
+    doc.fontSize(90).text('EXCELENCIA', 0, 540, { align: 'center', characterSpacing: 4 });
 
     // Se otorga...
-    doc.fontSize(22).font('Helvetica').fillColor('#64748b').text('Se otorga la presente certificación académica a:', 0, 780, { align: 'center' });
+    doc.fontSize(22).font('Helvetica').fillColor('#64748b').text('Se otorga la presente certificación académica a:', 0, 720, { align: 'center' });
     
     // Recipient
-    doc.fontSize(80).font('Helvetica-Bold').fillColor('#0f172a').text(user.name.toUpperCase(), 0, 850, { align: 'center' });
+    doc.fontSize(80).font('Helvetica-Bold').fillColor('#0f172a').text(user.name.toUpperCase(), 0, 790, { align: 'center' });
     
     // Description
     const descWidth = 800;
-    doc.fontSize(22).font('Helvetica-Oblique').fillColor('#475569').text('Por haber completado con distinción académica superior y rigor técnico el programa de formación ejecutiva integral de 15 módulos especializados en el dominio de:', (1080 - descWidth) / 2, 1050, { align: 'center', width: descWidth, lineGap: 8 });
+    doc.fontSize(22).font('Helvetica-Oblique').fillColor('#475569').text('Por haber completado con distinción académica superior y rigor técnico el programa de formación ejecutiva integral de 15 módulos especializados en el dominio de:', (1080 - descWidth) / 2, 980, { align: 'center', width: descWidth, lineGap: 8 });
     
     // Program
-    doc.fontSize(40).font('Helvetica-Bold').fillColor('#1e3a8a').text('Certificación de Data Manager', 0, 1280, { align: 'center' });
-    doc.fontSize(24).font('Helvetica-Bold').fillColor('#3b82f6').text('Especialidad Superior en Gobierno de Datos y Ciberseguridad', 0, 1340, { align: 'center' });
+    doc.fontSize(40).font('Helvetica-Bold').fillColor('#1e3a8a').text('Certificación de Data Manager', 0, 1200, { align: 'center' });
+    doc.fontSize(24).font('Helvetica-Bold').fillColor('#3b82f6').text('Especialidad Superior en Gobierno de Datos y Ciberseguridad', 0, 1260, { align: 'center' });
     
     // Footer - Centered stacked elements for portrait
-    const footerY = 1500;
+    const footerY = 1450;
     
     // Signatures Area
     const signatureY = footerY + 200;
@@ -153,7 +154,7 @@ async function startServer() {
     // Signature Area - Miguel
     const sealPath = path.join(process.cwd(), 'public', 'seal.png');
     try {
-      doc.image(sealPath, (1080 - 200) / 2, signatureY - 180, { width: 200 });
+      doc.image(sealPath, (1080 - 300) / 2, signatureY - 260, { width: 300 });
     } catch (e) {
       console.warn('Seal image not found at /public/seal.png');
     }
