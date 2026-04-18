@@ -28,97 +28,124 @@ export default function Welcome({ onLogin }: { onLogin: (id: string, name: strin
     }
   };
 
-  return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+  return (    <div className="min-h-screen flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
+      {/* Decorative Gradients */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/20 rounded-full blur-[120px] pointer-events-none" />
+
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-[500px] max-w-[95vw] bg-white/15 backdrop-blur-[40px] border border-white/30 rounded-[32px] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] overflow-hidden"
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="w-full max-w-[500px] glass-morphism rounded-[40px] shadow-2xl relative z-10 overflow-hidden"
       >
-        <div className="p-10 text-center">
-          <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center text-primary border border-white/20">
-              <Database size={32} />
-            </div>
+        <div className="p-8 sm:p-12 text-center">
+          <div className="flex justify-center mb-8">
+            <motion.div 
+              initial={{ scale: 0.8, rotate: -5 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
+              className="w-28 h-28 bg-white/[0.03] rounded-[32px] flex items-center justify-center border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)] overflow-hidden p-4 group hover:border-primary/30 transition-colors"
+            >
+              <img 
+                src="/logo.png" 
+                alt="DataAcademy Logo" 
+                className="w-full h-full object-contain filter group-hover:brightness-110 transition-all"
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  // Fallback to Icon if image is missing
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.parentElement!.innerHTML = '<div class="text-primary"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg></div>';
+                }}
+              />
+            </motion.div>
           </div>
           
-          <h1 className="text-4xl font-extrabold text-white mb-2 tracking-tight">
-            DataAcademy
+          <h1 className="text-4xl sm:text-5xl font-black text-white mb-2 tracking-tighter font-display">
+            Data<span className="text-primary font-light">Academy</span>
           </h1>
-          <p className="text-primary font-medium mb-6 uppercase tracking-widest text-xs">
+          <p className="text-primary/80 font-bold mb-6 uppercase tracking-[0.3em] text-[0.65rem] sm:text-[0.7rem]">
             Certificación de Data Manager
           </p>
-          <p className="text-white/70 mb-8 text-[0.95rem] leading-relaxed max-w-sm mx-auto">
-            Formación ejecutiva de alto nivel en gobierno, arquitectura y gestión de activos de datos.
+          <p className="text-white/60 mb-10 text-[0.9rem] sm:text-[1rem] leading-relaxed max-w-sm mx-auto font-light">
+            Formación ejecutiva de alto nivel en gobierno de datos, seguridad estratégica y arquitectura moderna.
           </p>
 
           {step === 'input' && (
-            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-              <label className="block text-left text-[0.8rem] mb-2 text-primary uppercase tracking-widest">
-                Ingresa tu nombre completo
-              </label>
-              <div className="relative mb-8">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <UserCircle className="h-5 w-5 text-white/50" />
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }} 
+              animate={{ opacity: 1, x: 0 }}
+              className="space-y-6"
+            >
+              <div className="text-left">
+                <label className="block text-[0.65rem] mb-2 text-white/40 uppercase tracking-[0.2em] font-bold">
+                  Nombre Completo del Estudiante
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-primary text-white/30">
+                    <UserCircle className="h-5 w-5" />
+                  </div>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleNext()}
+                    className="block w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-white text-[1rem] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 placeholder-white/20 transition-all"
+                    placeholder="Ej. Miguel Jonathan Mogrovejo"
+                  />
                 </div>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleNext()}
-                  className="block w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white text-[1.1rem] focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary placeholder-white/50"
-                  placeholder="Ej. Juan Pérez"
-                />
+                {error && <p className="mt-2 text-xs text-accent font-medium">{error}</p>}
               </div>
-              {error && <p className="mb-4 text-sm text-accent">{error}</p>}
               
               <button
                 onClick={handleNext}
-                className="w-full flex items-center justify-center py-[14px] bg-white text-[#0f2027] font-semibold rounded-xl hover:bg-gray-100 transition-colors disabled:opacity-50"
-                disabled={!name.trim()}
+                className="w-full flex items-center justify-center py-4 bg-white text-dark-surface font-bold rounded-2xl hover:bg-primary hover:text-white transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-xl disabled:opacity-20 disabled:grayscale"
+                disabled={name.trim().length < 3}
               >
-                Comenzar <ArrowRight className="ml-2 h-4 w-4" />
+                Comenzar Trayectoria <ArrowRight className="ml-2 h-5 w-5" />
               </button>
             </motion.div>
           )}
 
           {step === 'confirm' && (
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 mb-6 text-left">
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
+              <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-8 text-left">
                 <div className="flex items-start">
-                  <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
-                  <div className="ml-3">
-                    <h3 className="text-sm font-medium text-white mb-2">Confirmación de Certificado</h3>
-                    <div className="text-sm text-white/80">
-                      <p>Este nombre aparecerá en tu certificado final. Verifica que esté escrito correctamente:</p>
-                      <p className="mt-3 font-bold text-xl text-white">{name}</p>
-                    </div>
+                  <div className="bg-primary/20 p-2 rounded-lg mt-1">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="text-sm font-bold text-white mb-1">Confirmación Académica</h3>
+                    <p className="text-xs text-white/50 mb-4 font-light leading-relaxed">Verifica el nombre. Este se imprimirá en tu certificación oficial final.</p>
+                    <p className="font-display font-bold text-2xl text-white tracking-tight leading-tight">{name}</p>
                   </div>
                 </div>
               </div>
               
-              <div className="flex space-x-3">
+              <div className="flex gap-4">
                 <button
                   onClick={() => setStep('input')}
-                  className="flex-1 py-[14px] px-4 bg-transparent border border-white/20 rounded-xl text-sm font-semibold text-white hover:bg-white/5 transition-colors"
+                  className="flex-1 py-4 px-4 bg-white/5 border border-white/10 rounded-2xl text-sm font-bold text-white hover:bg-white/10 transition-colors"
                 >
-                  Editar
+                  Regresar
                 </button>
                 <button
                   onClick={handleConfirm}
-                  className="flex-1 py-[14px] px-4 bg-white text-[#0f2027] font-semibold rounded-xl hover:bg-gray-100 transition-colors"
+                  className="flex-1 py-4 px-4 bg-primary text-dark-surface font-bold rounded-2xl hover:bg-white transition-all transform hover:scale-[1.02] shadow-lg shadow-primary/20"
                 >
-                  Confirmar y Entrar
+                  Confirmar e Ingresar
                 </button>
               </div>
-              {error && <p className="mt-4 text-sm text-center text-accent">{error}</p>}
             </motion.div>
           )}
 
           {step === 'loading' && (
-            <div className="py-8 flex flex-col items-center justify-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mb-4"></div>
-              <p className="text-white/80 text-sm">Preparando tu academia...</p>
+            <div className="py-12 flex flex-col items-center justify-center">
+              <div className="relative w-16 h-16 mb-6">
+                <div className="absolute inset-0 border-4 border-primary/20 rounded-full" />
+                <div className="absolute inset-0 border-4 border-primary rounded-full border-t-transparent animate-spin" />
+              </div>
+              <p className="text-white/60 text-sm font-medium tracking-widest uppercase animate-pulse">Sincronizando Entorno Académico</p>
             </div>
           )}
         </div>

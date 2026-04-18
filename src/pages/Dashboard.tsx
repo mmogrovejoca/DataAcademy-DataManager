@@ -53,171 +53,240 @@ export default function Dashboard({ userId, userName, onLogout }: { userId: stri
   if (loading) return <div className="min-h-screen flex items-center justify-center dark:bg-slate-900 text-slate-500">Cargando dashboard...</div>;
 
   return (
-    <div className="min-h-screen pb-12">
+    <div className="min-h-screen pb-20 relative overflow-hidden">
+      {/* Dynamic Background Accents */}
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10">
+        <div className="absolute top-[10%] left-[20%] w-[30%] h-[30%] bg-primary/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[20%] right-[10%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[120px]" />
+      </div>
+
       {/* Header */}
-      <header className="bg-white/10 backdrop-blur-[15px] border border-white/20 rounded-2xl mx-4 sm:mx-6 lg:mx-8 mt-4 sticky top-4 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2 font-black text-[1.4rem] tracking-tighter">
-              <span className="text-white">DATA</span><span className="text-primary tracking-widest font-light ml-1">ACADEMY</span>
+      <header className="glass-morphism mx-4 sm:mx-8 lg:mx-auto max-w-7xl mt-6 rounded-[24px] sticky top-6 z-40 transition-all duration-300">
+        <div className="px-6 sm:px-8">
+          <div className="flex justify-between items-center h-20">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center border border-white/10 shrink-0 p-2 overflow-hidden">
+                <img 
+                  src="/logo.png" 
+                  alt="Logo" 
+                  className="w-full h-full object-contain"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-white font-black text-xl tracking-tight leading-none font-display">DATA<span className="text-primary font-light">ACADEMY</span></span>
+                <span className="text-[0.6rem] text-primary/60 uppercase tracking-[0.2em] font-bold mt-1 hidden sm:block">Executive Management</span>
+              </div>
             </div>
             
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-6">
               <button 
                 onClick={() => setShowPreview(true)}
-                className="hidden sm:flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full transition-colors text-white text-sm font-medium"
-                title="Ver Ejemplo del Certificado"
+                className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all text-white/80 text-xs sm:text-sm font-semibold group"
               >
-                <Eye size={16} /> <span className="hidden md:inline">Ver Certificado</span>
-              </button>
-              <button 
-                onClick={() => setShowPreview(true)}
-                className="sm:hidden p-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full transition-colors text-white"
-                title="Ver Ejemplo del Certificado"
-              >
-                <Award size={18} />
+                <Eye size={18} className="group-hover:text-primary transition-colors" /> 
+                <span className="hidden sm:inline">Previsualizar Certificado</span>
               </button>
 
-              <div className="text-sm font-medium text-white/80 border-l border-white/20 pl-4">
-                Hola, <span className="font-bold text-white">{userName}</span>
+              <div className="h-8 w-[1px] bg-white/10 mx-1 hidden sm:block" />
+
+              <div className="flex items-center gap-4">
+                <div className="hidden md:flex flex-col items-end">
+                  <span className="text-white/40 text-[0.65rem] uppercase tracking-widest font-bold">Estudiante</span>
+                  <span className="text-white font-bold text-sm tracking-tight">{userName}</span>
+                </div>
+                <button 
+                  onClick={onLogout} 
+                  className="w-10 h-10 flex items-center justify-center bg-accent/10 hover:bg-accent/20 text-accent rounded-xl transition-all border border-accent/20 active:scale-95"
+                  title="Cerrar sesión"
+                >
+                  <LogOut size={20} />
+                </button>
               </div>
-              <button onClick={onLogout} className="p-2 hover:bg-white/10 rounded-full transition-colors text-white/80" title="Cerrar sesión">
-                <LogOut size={20} />
-              </button>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        {/* Progress & Instructor Notice */}
-        <div className="bg-white/10 backdrop-blur-[15px] border border-white/20 rounded-[20px] p-6 md:p-8 text-white mb-10 shadow-[0_4px_30px_rgba(0,0,0,0.1)] relative overflow-hidden">
-          <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h2 className="text-2xl font-bold mb-2">Tu progreso global</h2>
-              <p className="text-white/70 mb-6 font-light">
-                Completa todos los módulos con al menos 70% de aciertos para obtener tu certificado avalado.
-              </p>
-              
-              <div className="flex items-center gap-4 mb-2">
-                <div className="flex-1 bg-white/10 rounded-md h-2 overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    animate={{ width: `${overallProgress}%` }}
-                    transition={{ duration: 1 }}
-                    className="bg-gradient-to-r from-primary to-secondary h-full"
-                  />
+      <main className="max-w-7xl mx-auto px-4 sm:px-8 mt-12 relative z-10">
+        {/* Welcome & Progress Section */}
+        <section className="mb-12">
+          <div className="glass-morphism rounded-[40px] p-8 sm:p-12 relative overflow-hidden group">
+            {/* Background pattern */}
+            <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
+            
+            <div className="relative z-10 grid lg:grid-cols-[1fr,400px] gap-12 items-center">
+              <div>
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <h2 className="text-3xl sm:text-4xl font-black text-white mb-4 tracking-tighter leading-tight font-display">
+                    Panel de Control <br/><span className="text-primary font-light underline decoration-white/10 underline-offset-8">Académico</span>
+                  </h2>
+                  <p className="text-white/50 mb-8 max-w-xl text-[0.95rem] leading-relaxed font-light">
+                    Bienvenido de vuelta, <span className="text-white font-medium">{userName}</span>. Tu trayectoria hacia la certificación de Data Manager está al {overallProgress}%. Mantén la disciplina estratégica en cada módulo.
+                  </p>
+                </motion.div>
+                
+                <div className="space-y-4">
+                  <div className="flex justify-between items-end mb-2 px-1">
+                    <span className="text-[0.65rem] uppercase tracking-[0.2em] font-bold text-white/40">Progreso de Candidatura</span>
+                    <span className="text-2xl font-black text-white font-mono">{overallProgress}%</span>
+                  </div>
+                  <div className="bg-white/5 rounded-full h-4 p-1 border border-white/10">
+                    <motion.div 
+                      initial={{ width: 0 }}
+                      animate={{ width: `${overallProgress}%` }}
+                      transition={{ duration: 1.5, ease: "circOut" }}
+                      className="h-full bg-gradient-to-r from-primary to-secondary rounded-full shadow-[0_0_15px_rgba(0,210,255,0.4)]"
+                    />
+                  </div>
                 </div>
-                <span className="font-bold text-lg">{overallProgress}%</span>
+              </div>
+              
+              <div className="relative">
+                {allPassed ? (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="bg-white text-dark-surface rounded-[32px] p-8 shadow-2xl relative z-10 transform lg:rotate-2 hover:rotate-0 transition-transform duration-500"
+                  >
+                    <div className="flex flex-col items-center text-center">
+                      <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center text-primary mb-6 shadow-inner">
+                        <Award size={32} />
+                      </div>
+                      <h3 className="text-xl font-black mb-3 font-display">¡GRADUACIÓN DISPONIBLE!</h3>
+                      <p className="text-dark-surface/60 text-sm mb-8 font-medium leading-normal">
+                        Has superado satisfactoriamente los 15 módulos de nivel ejecutivo.
+                      </p>
+                      <button
+                        onClick={() => navigate('/certificate')}
+                        className="w-full py-4 bg-primary text-dark-surface rounded-2xl font-black text-sm tracking-widest hover:bg-dark-surface hover:text-white transition-all transform hover:translate-y-[-2px] active:translate-y-0 shadow-lg"
+                      >
+                        DESCARGAR CERTIFICACIÓN
+                      </button>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <div className="bg-white/5 border border-white/10 rounded-[32px] p-8 backdrop-blur-md">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center text-primary shrink-0">
+                        <BookOpen size={20} />
+                      </div>
+                      <span className="text-[0.65rem] uppercase tracking-[0.2em] font-bold text-primary">Insight Ejecutivo</span>
+                    </div>
+                    <blockquote className="text-white/80 font-serif italic text-lg leading-relaxed mb-6">
+                      "La gobernanza de datos no es un proyecto, es un cambio cultural que habilita la resiliencia en la era digital."
+                    </blockquote>
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-[2px] bg-primary/40 rounded-full" />
+                      <span className="text-[0.7rem] uppercase tracking-widest text-white/40 font-bold">M. Mogrovejo • Senior Advisor</span>
+                    </div>
+                  </div>
+                )}
+                {/* Decorative glow */}
+                <div className="absolute -inset-4 bg-primary/20 blur-[50px] -z-10 rounded-[40px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </div>
             </div>
-            
-            {allPassed ? (
-              <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg">
-                    <Award size={24} className="text-[#0f2027]" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-white">¡Felicidades!</h3>
-                    <p className="text-white/70 text-sm">Has completado tu formación.</p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => navigate('/certificate')}
-                  className="w-full py-3 bg-white text-[#0f2027] rounded-xl font-bold shadow-sm hover:bg-gray-100 transition-colors"
-                >
-                  Obtener Certificado
-                </button>
-              </div>
-            ) : (
-              <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
-                <h3 className="font-medium text-primary mb-2 flex items-center gap-2">
-                  <BookOpen size={18} /> Instructor Virtual
-                </h3>
-                <p className="text-white/80 font-light text-sm italic">
-                  "El camino del Data Manager requiere paciencia y visión organizativa. Enfócate primero en entender qué aporta valor al negocio."
-                </p>
-              </div>
-            )}
           </div>
-          
-          {/* Decorative graphic */}
-          <div className="absolute -right-10 -bottom-10 opacity-[0.05] pointer-events-none mix-blend-overlay">
-            <Database size={250} />
+        </section>
+
+        {/* Modules Grid Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-end mb-8 gap-4 px-2">
+          <div>
+            <span className="text-primary text-[0.7rem] uppercase tracking-[0.3em] font-black block mb-2">Plan de Estudios</span>
+            <h3 className="text-3xl font-bold text-white tracking-tight font-display">Módulos de Formación</h3>
+          </div>
+          <div className="text-white/40 text-xs hidden sm:block font-medium">
+            15 Módulos obligatorios para certificación
           </div>
         </div>
 
         {/* Modules Grid */}
-        <h3 className="text-2xl font-light mb-6 text-white">Ruta de Módulos</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {modules.map((module, index) => {
             const unlocked = isUnlocked(index);
             const status = getModuleStatus(module.id);
             const scoreRecord = progressData.find(p => p.module_id === module.id);
             
             return (
-              <div 
-                key={module.id} 
-                className={`relative flex flex-col pt-5 px-6 pb-6 rounded-[20px] backdrop-blur-[15px] border ${
-                  status === 'passed' ? 'border-primary bg-[rgba(0,210,255,0.1)]' :
-                  unlocked ? 'border-glass-border bg-glass hover:bg-white/15' : 
-                  'border-transparent bg-white/5 opacity-60'
-                } transition-all duration-300`}
+              <motion.div 
+                key={module.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className={`group relative flex flex-col p-8 rounded-[32px] transition-all duration-500 border ${
+                  status === 'passed' ? 'bg-primary/5 border-primary/30 shadow-[0_0_40px_rgba(0,210,255,0.05)]' :
+                  unlocked ? 'bg-white/5 border-white/10 hover:bg-white/[0.08] hover:border-white/20' : 
+                  'bg-white/[0.02] border-white/5 opacity-40 grayscale pointer-events-none'
+                }`}
               >
-                <div className="mb-4 flex justify-between items-center">
-                  <div className={`w-8 h-8 rounded flex items-center justify-center font-bold text-sm ${
-                    status === 'passed' ? 'bg-primary text-[#0f2027]' :
-                    unlocked ? 'bg-white/20 text-white' :
-                    'bg-black/30 text-white/50'
-                  }`}>
-                    {index + 1}
-                  </div>
+                <div className="mb-8 flex justify-between items-start">
+                  <span className={`text-4xl font-black font-display opacity-10 ${status === 'passed' ? 'text-primary' : 'text-white'}`}>
+                    {(index + 1).toString().padStart(2, '0')}
+                  </span>
                   
-                  {status === 'passed' && (
-                    <div className="flex items-center gap-1.5 px-3 py-1 bg-white/10 border border-white/20 text-primary rounded-md text-[10px] font-bold uppercase tracking-wider">
-                      <CheckCircle size={12} /> Aprobado ({scoreRecord.score}%)
-                    </div>
-                  )}
-                  {status === 'failed' && (
-                    <div className="px-3 py-1 bg-accent/20 border border-accent/30 text-accent rounded-md text-[10px] font-bold uppercase tracking-wider">
-                      Reprobado ({scoreRecord.score}%)
-                    </div>
-                  )}
-                  {!unlocked && (
-                    <div className="text-white/40">
-                      <Lock size={16} />
-                    </div>
-                  )}
+                  <div className="flex flex-col items-end gap-2">
+                    {status === 'passed' && (
+                      <div className="flex items-center gap-1.5 px-3 py-1.5 bg-primary/20 border border-primary/30 text-primary rounded-xl text-[0.6rem] font-black uppercase tracking-widest shadow-lg shadow-primary/10">
+                        <CheckCircle size={12} strokeWidth={3} /> {scoreRecord.score}%
+                      </div>
+                    )}
+                    {status === 'failed' && (
+                      <div className="flex items-center gap-1.5 px-3 py-1.5 bg-accent/20 border border-accent/30 text-accent rounded-xl text-[0.6rem] font-black uppercase tracking-widest">
+                        Repetir ({scoreRecord.score}%)
+                      </div>
+                    )}
+                    {!unlocked && (
+                      <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center text-white/30 border border-white/5">
+                        <Lock size={18} />
+                      </div>
+                    )}
+                  </div>
                 </div>
                 
-                <h4 className={`text-[1.1rem] font-medium leading-tight mb-3 ${unlocked ? 'text-white' : 'text-white/60'}`}>
+                <h4 className={`text-xl font-bold leading-[1.15] mb-4 tracking-tight font-display transition-colors ${status === 'passed' ? 'text-white' : unlocked ? 'group-hover:text-primary text-white' : 'text-white/60'}`}>
                   {module.title}
                 </h4>
-                <p className="text-[0.85rem] text-white/70 mb-6 flex-1 line-clamp-2 font-light">
+                <p className="text-[0.9rem] text-white/50 mb-8 flex-1 leading-relaxed font-light line-clamp-3">
                   {module.description}
                 </p>
                 
-                {unlocked ? (
+                {unlocked && (
                   <Link 
                     to={`/module/${module.id}`}
-                    className={`w-full py-[12px] rounded-xl text-center text-[0.85rem] font-bold flex items-center justify-center transition-colors ${
-                      status === 'passed' ? 'bg-transparent border border-white/20 text-white hover:bg-white/10' :
-                      'bg-white text-[#0f2027] hover:bg-gray-100 shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.5)]'
+                    className={`w-full py-4 rounded-2xl text-[0.7rem] tracking-[0.2em] font-black uppercase flex items-center justify-center transition-all transform active:scale-95 ${
+                      status === 'passed' 
+                      ? 'bg-white/5 text-white/60 hover:bg-white/10 border border-white/10' 
+                      : 'bg-white text-dark-surface hover:bg-primary hover:text-white shadow-xl group-hover:shadow-primary/20 group-hover:scale-[1.02]'
                     }`}
                   >
-                    {status === 'passed' ? 'Repasar módulo' : 'Comenzar módulo'} <ChevronRight size={16} className="ml-1" />
+                    {status === 'passed' ? 'Repasar Lección' : 'Iniciar Módulo'} <ChevronRight size={14} className="ml-2" />
                   </Link>
-                ) : (
-                  <button disabled className="w-full py-[12px] rounded-xl bg-black/20 text-white/30 text-[0.85rem] font-semibold cursor-not-allowed">
-                    Bloqueado
-                  </button>
                 )}
-              </div>
+              </motion.div>
             );
           })}
         </div>
       </main>
+
+      {/* Footer Branding */}
+      <footer className="max-w-7xl mx-auto px-8 py-16 mt-12 border-t border-white/5 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6">
+        <div className="flex items-center gap-4 grayscale opacity-40 hover:grayscale-0 transition-all">
+          <img 
+            src="/logo.png" 
+            alt="DataAcademy" 
+            className="w-8 h-8 object-contain"
+            referrerPolicy="no-referrer"
+          />
+          <span className="font-display font-black tracking-tighter text-xl uppercase text-white">DataAcademy</span>
+        </div>
+        <div className="text-white/20 text-[0.7rem] font-medium tracking-widest uppercase">
+          © {new Date().getFullYear()} DataAcademy Global • Academia de Formación Ejecutiva
+        </div>
+      </footer>
 
       {/* Certificate Preview Modal */}
       <AnimatePresence>
